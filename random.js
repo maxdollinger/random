@@ -4,12 +4,11 @@ class Random {
   constructor() {
     this.num = '0123456789';
     this.charsLC = 'abcdefghijklmnopqrstuvwxyz';
-    this.charsUC = charsLowerCase.toUpperCase();
+    this.charsUC = this.charsLC.toUpperCase();
     this.special = '!@#$%&*_-=+;:,<>.|'
   }
 
   random(length, chars) {
-    chars = chars.join('');
     let str = [];
 
     for(let i = 1; i <= length; i++) {
@@ -36,7 +35,7 @@ class Random {
     if(option === 1) charSet = this.charsLC + this.charsUC;
     if(option === 2) charSet = this.charsUC;
 
-    return this.randomFactory(length, charSet)
+    return this.random(length, charSet)
   }
 
   charNumStr(length, option) {
@@ -44,17 +43,18 @@ class Random {
     if(option === 1) charSet += this.charsUC;
     if(option === 2) charSet = this. number + this.charsUC;
 
-    return this.randomFactory(length, charSet)
+    return this.random(length, charSet)
   }
 
   charNumSpeStr(length, special, option) {
-    special = special ? special : this.special;
+    special = special ? special : '!@#$%&*_-=+;:,<>.|';
     let charSet = this.num + special +  this.charsLC;
     if(option === 1) charSet += this.charsUC;
     if(option === 2) charSet =  this.num + special +  this.charsLC;
 
-    return this.randomFactory(length, charSet)
+    return this.random(length, charSet)
   }
 }
 
-module.exports = Random;
+const instance = new Random;
+module.exports = instance;
