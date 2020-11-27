@@ -1,64 +1,60 @@
 
-exports.randomNumStr = length => {
-  let str = [];
-  for(let i = 1; i <= length; i++) {
-    str.push(Math.floor(Math.random() * 10).toString(16));
+class Random {
+
+  constructor() {
+    this.num = '0123456789';
+    this.charsLC = 'abcdefghijklmnopqrstuvwxyz';
+    this.charsUC = charsLowerCase.toUpperCase();
+    this.special = '!@#$%&*_-=+;:,<>.|'
   }
-  return str.join('');
-}
 
-exports.randomHexStr = length => {
-     let str = [];
-     for(let i = 1; i <= length; i++) {
-       str.push(Math.floor(Math.random() * 16).toString(16));
-     }
-     return str.join('');
-}
+  random(length, chars) {
+    chars = chars.join('');
+    let str = [];
 
-exports.randomBinString = length => {
-     let str = [];
-     for(let i = 1; i <= length; i++) {
-       str.push(Math.floor(Math.random() * 2).toString(2));
-     }
-     return str.join('');
-}
+    for(let i = 1; i <= length; i++) {
+    str.push(chars[Math.floor(Math.random() * chars.length)]);
+    }
 
-exports.randomCharString = length => {
-     const chars = 'abcdefghijklmnopqrstuvwxyz';
-     let str = [];
-     for(let i = 1; i <= length; i++) {
-       const number = Math.floor(Math.random() * (chars.length+1));
-       str.push(chars[number]);
-     }
-     return str.join('');
-}
-
-exports.randomCharNumString = length => {
-     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-     let str = [];
-     for(let i = 1; i <= length; i++) {
-       const number = Math.floor(Math.random() * (chars.length+1));
-       str.push(chars[number]);
-     }
-     return str.join('');
-}
-
-exports.randomCharNumSpeString = (length, special ) => {
-     special = special ? special : '!@#$%&*_-=+;:,<>.|';
-     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789' + special;
-     let str = [];
-     for(let i = 1; i <= length; i++) {
-       const number = Math.floor(Math.random() * (chars.length+1));
-       str.push(chars[number]);
-     }
-     return str.join('');
-}
-
-exports.randomStrFromArr = (length, arr) => {
-  let str = [];
-  for(let i = 1; i <= length; i++) {
-    const number = Math.floor(Math.random() * (arr.length+1));
-    str.push(arr[number]);
+    return str.join('');
   }
-  return str.join('');
+
+  numStr(length) {
+    return this.random(length, this.num)
+  }
+
+  hexStr(length) {
+    return this.random(length, (this.num+'abcdef'));
+  }
+
+  binStr(length) {
+    return this.random(length, '01');
+  }
+
+  charStr(length, option) {
+    let charSet = this.charsLC;
+    if(option === 1) charSet = this.charsLC + this.charsUC;
+    if(option === 2) charSet = this.charsUC;
+
+    return this.randomFactory(length, charSet)
+  }
+
+  charNumStr(length, option) {
+    let charSet = this.num + this.charsLC;
+    if(option === 1) charSet += this.charsUC;
+    if(option === 2) charSet = this. number + this.charsUC;
+
+    return this.randomFactory(length, charSet)
+  }
+
+  charNumSpeStr(length, special, option) {
+    special = special ? special : this.special;
+    let charSet = this.num + special +  this.charsLC;
+    if(option === 1) charSet += this.charsUC;
+    if(option === 2) charSet =  this.num + special +  this.charsLC;
+
+    return this.randomFactory(length, charSet)
+  }
 }
+
+module.exports = Random;
