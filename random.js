@@ -45,7 +45,7 @@ function random(length, chars) {
   let str = [];
 
   crypto.randomBytes(length).forEach((el) => {
-    const number = Math.floor(el * ((chars.length - 1) / 256));
+    const number = Math.round(el * ((chars.length - 1) / 256));
     str.push(chars[number]);
   });
 
