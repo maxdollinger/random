@@ -1,3 +1,5 @@
+const crypto = require("crypto");
+
 function generate(options) {
   const { type, length, upperCase, special, charSet } = { ...options };
   const num = "0123456789";
@@ -42,9 +44,10 @@ function random(length, chars) {
   length = length ? length : 32;
   let str = [];
 
-  for (let i = 1; i <= length; i++) {
-    str.push(chars[Math.floor(Math.random() * chars.length)]);
-  }
+  crypto.randomBytes(length).forEach((el) => {
+    const number = Math.floor(el * ((chars.length - 1) / 256));
+    str.push(chars[number]);
+  });
 
   return str.join("");
 }
