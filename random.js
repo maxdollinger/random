@@ -56,5 +56,5 @@ class Random {
   }
 }
 
-const instance = new Random;
+const instance = new Random();
 module.exports = instance;
