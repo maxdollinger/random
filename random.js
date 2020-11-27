@@ -30,12 +30,12 @@ function generate(options) {
       break;
   }
 
+  if (charSet) str = charSet;
+  if (special) str += special;
   if (upperCase === "with") {
     str = str.replace(/[a-z]+/g, (el) => el + el.toUpperCase());
   }
   if (upperCase === "only") str = str.toUpperCase();
-  if (charSet) str = charSet;
-  if (special) str += special;
 
   return random(length, str);
 }
