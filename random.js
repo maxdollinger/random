@@ -41,7 +41,7 @@ class Random {
   charNumStr(length, option) {
     let charSet = this.num + this.charsLC;
     if(option === 1) charSet += this.charsUC;
-    if(option === 2) charSet = this. number + this.charsUC;
+    if(option === 2) charSet = this. num + this.charsUC;
 
     return this.random(length, charSet)
   }
